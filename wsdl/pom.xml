@@ -1,0 +1,73 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.jetoile.poc.tuto.ws.metro</groupId>
+        <artifactId>metro-project-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+  
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+      
+  
+    <artifactId>wsdl</artifactId>
+    <packaging>jar</packaging>
+    
+    <build>
+        <plugins>
+            <!--<plugin> -->
+                <!--<groupId>org.codehaus.mojo</groupId> -->
+                <!--<artifactId>build-helper-maven-plugin</artifactId>-->
+                <!--<executions> -->
+                    <!--<execution> -->
+                        <!--<id>xml-schema</id> -->
+                        <!--<goals> -->
+                            <!--<goal>attach-artifact</goal> -->
+                        <!--</goals> -->
+                        <!--<configuration> -->
+                            <!--<artifacts> -->
+                                <!--<artifact> -->
+                                    <!--<file>src/main/resources/HelloService.wsdl</file> -->
+                                    <!--<type>wsdl</type> -->
+                                <!--</artifact> -->
+                            <!--</artifacts> -->
+                        <!--</configuration> -->
+                    <!--</execution> -->
+                <!--</executions> -->
+            <!--</plugin>-->
+
+            <plugin>
+                <groupId>org.jvnet.jax-ws-commons</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.1</version>
+                <!-- if you want to use a specific version of JAX-WS, you can do so like this -->
+                <dependencies>
+                    <dependency>
+                        <groupId>com.sun.xml.ws</groupId>
+                        <artifactId>jaxws-tools</artifactId>
+                        <version>2.2</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <wsdlDirectory>${basedir}/src/main/resources</wsdlDirectory>
+                    <wsdlFiles><wsdlFile>HelloService.wsdl</wsdlFile></wsdlFiles>
+                    <sei></sei><!-- The name of your generated source package -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+  
+  
+  
+</project>
